@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import {
   Building2,
   HardHat,
@@ -8,6 +9,7 @@ import {
   Wrench,
   Boxes,
   Zap,
+  ArrowRight,
   type LucideIcon,
 } from "lucide-react";
 import { services } from "@/lib/data";
@@ -24,7 +26,10 @@ export default function ServicesGrid() {
             const Icon = icons[service.icon] ?? Building2;
             return (
               <Reveal key={service.title} delay={i * 0.06}>
-                <div className="group overflow-hidden rounded-2xl border border-paper/10 bg-charcoal">
+                <Link
+                  href={service.href}
+                  className="group block overflow-hidden rounded-2xl border border-paper/10 bg-charcoal transition-colors hover:border-gold/50"
+                >
                   <div className="relative h-48 w-full overflow-hidden">
                     <Image
                       src={service.image}
@@ -45,8 +50,12 @@ export default function ServicesGrid() {
                     <p className="mt-2.5 text-[14px] leading-relaxed text-paper/65">
                       {service.description}
                     </p>
+                    <span className="mt-4 inline-flex items-center gap-2 text-[13px] font-semibold uppercase tracking-wide text-gold">
+                      Learn more
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                    </span>
                   </div>
-                </div>
+                </Link>
               </Reveal>
             );
           })}

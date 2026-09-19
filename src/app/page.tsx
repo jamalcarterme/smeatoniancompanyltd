@@ -2,7 +2,7 @@ import Footer from "@/components/Footer";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import HomeShowcase from "@/components/HomeShowcase";
-import About from "@/components/About";
+import AboutPreview from "@/components/AboutPreview";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import Gallery from "@/components/Gallery";
 import ConsultGallery from "@/components/ConsultGallery";
@@ -16,7 +16,7 @@ export default function Home() {
       <main>
         <Hero />
         <HomeShowcase />
-        <About />
+        <AboutPreview />
         <WhyChooseUs />
         <Gallery />
         <ConsultGallery />

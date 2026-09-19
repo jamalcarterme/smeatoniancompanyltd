@@ -50,7 +50,10 @@ export const services = [
       "End-to-end development of residential and commercial real estate, from land assessment and planning to fully completed properties.",
     icon: "Building2",
     image: "/images/project-complex-1.jpg",
-    href: "/services",
+    href: "/services/property-development",
+    slug: "property-development",
+    teaser:
+      "Land to landmark — developments shaped for the way people live and do business.",
   },
   {
     title: "Building Construction",
@@ -58,7 +61,10 @@ export const services = [
       "Complete building construction services for homes, estates and commercial properties, delivered with structural precision and quality craftsmanship.",
     icon: "HardHat",
     image: "/images/construction-mansion.jpg",
-    href: "/services",
+    href: "/services/building-construction",
+    slug: "building-construction",
+    teaser:
+      "Homes, estates and commercial buildings, built with structural precision.",
   },
   {
     title: "Detailed Construction Finishes",
@@ -66,7 +72,10 @@ export const services = [
       "Meticulous interior and exterior finishing works that bring a refined, lasting quality to every structure we build.",
     icon: "PaintRoller",
     image: "/images/project-facade-2.jpg",
-    href: "/services",
+    href: "/services/construction-finishes",
+    slug: "construction-finishes",
+    teaser:
+      "The finishing touches that give every space its character and quality.",
   },
   {
     title: "Building Maintenance",
@@ -74,7 +83,10 @@ export const services = [
       "Ongoing maintenance and facility support to protect your property's value and keep every system running smoothly.",
     icon: "Wrench",
     image: "/images/project-villa-1.jpg",
-    href: "/services",
+    href: "/services/building-maintenance",
+    slug: "building-maintenance",
+    teaser:
+      "Keeping your property in top condition long after handover.",
   },
   {
     title: "Construction Materials",
@@ -82,7 +94,10 @@ export const services = [
       "Sourcing and supply of quality construction materials, ensuring every project is built on a foundation of reliable, durable inputs.",
     icon: "Boxes",
     image: "/images/construction-workers.jpg",
-    href: "/services",
+    href: "/services/construction-materials",
+    slug: "construction-materials",
+    teaser:
+      "Reliable, quality materials for projects of every size.",
   },
   {
     title: "M&E (Mechanical & Electrical)",
@@ -90,7 +105,10 @@ export const services = [
       "Mechanical and electrical engineering services integrated into every build, from design through installation and commissioning.",
     icon: "Zap",
     image: "/images/construction-crane-towers.jpg",
-    href: "/services",
+    href: "/services/mechanical-electrical",
+    slug: "mechanical-electrical",
+    teaser:
+      "Mechanical and electrical systems, designed and installed right.",
   },
 ];
 

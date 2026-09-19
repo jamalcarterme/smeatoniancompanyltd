@@ -27,7 +27,7 @@ function Card({ service }: { service: Slide }) {
       <h3 className="font-display mt-6 text-[20px] font-semibold text-paper group-hover:text-gold transition-colors">
         {service.title}
       </h3>
-      <p className="mt-2.5 text-[15px] leading-relaxed text-paper/65">{service.description}</p>
+      <p className="mt-2.5 text-[15px] leading-relaxed text-paper/65">{service.teaser}</p>
     </Link>
   );
 }

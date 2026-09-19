@@ -23,35 +23,44 @@ export default function Hero() {
     const video = videoRef.current;
     if (!video) return;
 
+    // Muted playback is required for browsers to allow autoplay
     video.muted = true;
     video.defaultMuted = true;
+    video.setAttribute("muted", "");
+    video.setAttribute("playsinline", "");
 
     const markReady = () => setVideoReady(true);
 
-    const attemptPlay = async () => {
-      try {
-        await video.play();
-        markReady();
-      } catch {
-        // Autoplay was prevented, will play on first user interaction
-      }
+    const tryPlay = () => {
+      const playing = video.play();
+      if (playing) playing.then(markReady).catch(() => {});
     };
 
-    const handleCanPlay = () => attemptPlay();
-    const handleLoadedData = () => markReady();
+    // Start right away (also covers autoplay that began before hydration)
+    tryPlay();
 
-    video.addEventListener("canplay", handleCanPlay);
-    video.addEventListener("loadeddata", handleLoadedData);
+    video.addEventListener("loadeddata", tryPlay);
+    video.addEventListener("canplay", tryPlay);
     video.addEventListener("playing", markReady);
+    window.addEventListener("load", tryPlay);
+    document.addEventListener("visibilitychange", tryPlay);
 
-    if (video.readyState >= 2) {
-      attemptPlay();
-    }
+    // Fallback for browsers that block autoplay (e.g. low-power mode):
+    // start on the very first interaction
+    const interactions = ["pointerdown", "touchstart", "keydown", "scroll"] as const;
+    const onInteract = () => {
+      tryPlay();
+      interactions.forEach((e) => window.removeEventListener(e, onInteract));
+    };
+    interactions.forEach((e) => window.addEventListener(e, onInteract, { passive: true }));
 
     return () => {
-      video.removeEventListener("canplay", handleCanPlay);
-      video.removeEventListener("loadeddata", handleLoadedData);
+      video.removeEventListener("loadeddata", tryPlay);
+      video.removeEventListener("canplay", tryPlay);
       video.removeEventListener("playing", markReady);
+      window.removeEventListener("load", tryPlay);
+      document.removeEventListener("visibilitychange", tryPlay);
+      interactions.forEach((e) => window.removeEventListener(e, onInteract));
     };
   }, []);
 
@@ -76,7 +85,7 @@ export default function Hero() {
           muted
           loop
           playsInline
-          preload="metadata"
+          preload="auto"
           className={`absolute inset-0 h-full w-full object-cover transition-opacity duration-700 ${
             videoReady ? "opacity-100" : "opacity-0"
           }`}
@@ -103,7 +112,7 @@ export default function Hero() {
           animate="show"
           className="max-w-full mt-3 text-[clamp(24px,7vw,34px)] font-bold uppercase leading-[1.15] tracking-[0.01em] text-paper sm:text-[42px] lg:text-[50px]"
         >
-          Turning Ideas Into Reality
+          Building Is Our Passion
         </motion.h1>
 
         <motion.p
@@ -123,10 +132,8 @@ export default function Hero() {
           animate="show"
           className="mt-6 max-w-xl text-[16px] leading-relaxed text-paper/80 sm:text-[17px]"
         >
-          Smeatonian BC is an independent organization providing real estate,
-          consultancy and construction services in the fields of civil and
-          structural engineering — building homes, estates and businesses
-          across Lagos since 2019.
+          Real estate, consultancy and construction, bringing homes, estates
+          and businesses to life across Lagos since 2019.
         </motion.p>
 
         <motion.div
@@ -138,14 +145,14 @@ export default function Hero() {
         >
           <a
             href="/contact"
-            className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-3.5 text-[13px] font-semibold uppercase tracking-wide text-ink transition-colors hover:bg-gold-light"
+            className="inline-flex items-center justify-center rounded-full bg-gold px-8 py-3.5 text-[13px] font-semibold uppercase tracking-wide text-ink shadow-[0_8px_24px_rgba(0,0,0,0.55)] ring-2 ring-paper/60 transition-colors hover:bg-gold-light"
           >
             Get a Quote
           </a>
 
           <a
             href="/projects"
-            className="inline-flex items-center justify-center rounded-full border border-gold px-8 py-3.5 text-[13px] font-semibold uppercase tracking-wide text-gold transition-colors hover:bg-gold/10"
+            className="inline-flex items-center justify-center rounded-full border-2 border-gold-light bg-ink/70 px-[31px] py-[13px] text-[13px] font-semibold uppercase tracking-wide text-paper shadow-[0_8px_24px_rgba(0,0,0,0.55)] backdrop-blur-sm transition-colors hover:bg-gold hover:text-ink"
           >
             View Our Projects
           </a>

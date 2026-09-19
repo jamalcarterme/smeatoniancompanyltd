@@ -48,7 +48,13 @@ export const metadata: Metadata = {
     description: site.description,
     images: ["/images/project-complex-1.jpg"],
   },
-  icons: { icon: [{ url: "/favicon.ico", sizes: "any" }] },
+  icons: {
+    icon: [
+      { url: "/favicon.ico?v=2", sizes: "any" },
+      { url: "/icon.png?v=2", type: "image/png", sizes: "192x192" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png?v=2", sizes: "180x180" }],
+  },
   manifest: "/site.webmanifest",
   category: "Construction Company",
 };
